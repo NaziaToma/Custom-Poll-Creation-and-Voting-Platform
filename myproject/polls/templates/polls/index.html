@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{% load poll_extras %}
+
+{% block title %}Polls{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-8">
+        <h2 class="my-4">Polls</h2>
+        <ul class="list-group">
+            {% for poll_data in polls_with_results %}
+                <li class="list-group-item">
+                    <h4>{{ poll_data.poll.question }}</h4>
+
+                    <h5>Results:</h5>
+                    <ul class="list-group">
+                        {% if poll_data.total_votes > 0 %}
+                            {% for choice in poll_data.choices %}
+                                <li class="list-group-item">
+                                    {{ choice.choice_text }} -- {{ choice.votes }} vote{{ choice.votes|pluralize }}
+                                    <div class="progress mt-2">
+                                        <div class="progress-bar" role="progressbar" style="width: {{ choice.votes|percentage:poll_data.total_votes }}%;" aria-valuenow="{{ choice.votes|percentage:poll_data.total_votes }}" aria-valuemin="0" aria-valuemax="100">{{ choice.votes|percentage:poll_data.total_votes }}%</div>
+                                    </div>
+                                </li>
+                            {% endfor %}
+                        {% else %}
+                            <li class="list-group-item">No votes yet.</li>
+                        {% endif %}
+                    </ul>
+
+                    <a href="{% url 'polls:detail' poll_data.poll.id %}" class="btn btn-primary mt-3">Vote</a>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+</div>
+{% endblock %}

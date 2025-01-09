@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+
+{% block title %}About Us{% endblock %}
+
+{% block extra_head %}
+    <!-- Include Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+        }
+        .about-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 80vh;
+            text-align: center;
+        }
+        .about-content {
+            max-width: 600px;
+            padding: 30px;
+            border: 2px solid #007bff;
+            border-radius: 10px;
+            background-color: #f9f9f9;
+        }
+        h2 {
+            font-weight: 700;
+            font-size: 36px;
+            margin-bottom: 20px;
+        }
+        p {
+            font-weight: 300;
+            font-size: 18px;
+            color: #555;
+        }
+    </style>
+{% endblock %}
+
+{% block content %}
+    <div class="about-container">
+        <div class="about-content">
+            <h2>About Us</h2>
+            <p>"আমরা কি চাই" একটি অনলাইন ভোটিং প্ল্যাটফর্ম যেখানে বাংলাদেশি জনগণ বিভিন্ন ইস্যুতে তাদের মতামত প্রদান করতে পারেন। এই ওয়েবসাইটটি বিভিন্ন বিষয় নিয়ে জনগণের চিন্তা-ভাবনা ও মতামত জানতে সাহায্য করে। এখানে যে কেউ তাদের ভোট দিয়ে তাদের মতামত জানাতে পারেন। "আমরা কি চাই" প্ল্যাটফর্মটি জনগণের কণ্ঠস্বর হিসেবে কাজ করে এবং গুরুত্বপূর্ণ ইস্যুগুলোতে একটি সাধারণ জনমতের প্রতিফলন ঘটায়। এটি সহজেই ব্যবহারযোগ্য এবং সবার জন্য উন্মুক্ত।</p>
+        </div>
+    </div>
+{% endblock %}

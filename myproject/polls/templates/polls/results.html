@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+
+{% block title %}Results for {{ poll.question }}{% endblock %}
+
+{% block content %}
+<h2 class="my-4">{{ poll.question }}</h2>
+<ul class="list-group">
+    {% for choice in poll.choice_set.all %}
+        <li class="list-group-item">
+            {{ choice.choice_text }} -- {{ choice.votes }} vote{{ choice.votes|pluralize }}
+        </li>
+    {% endfor %}
+</ul><!-- Charts Button and Display -->
+<button id="showCharts" class="btn btn-info mt-3">Show Charts</button>
+
+<div id="charts" style="display:none;">
+    <img id="ageChart" src="{% url 'polls:age_chart' poll.id %}" class="img-fluid mt-3" alt="Age Range Pie Chart">
+    
+</div>
+
+<a href="{% url 'polls:index' %}" class="btn btn-primary mt-3">Back to Polls</a>
+
+<script>
+    document.getElementById("showCharts").onclick = function() {
+        document.getElementById("charts").style.display = "block";
+        this.style.display = "none";
+    };
+</script>
+{% endblock %}

@@ -1,0 +1,64 @@
+{% extends "base.html" %}
+{% load poll_extras %}
+
+{% block title %}{{ poll.question }}{% endblock %}
+
+{% block content %}
+<h2 class="my-4">{{ poll.question }}</h2>
+
+<form method="post" action="{% url 'polls:vote' poll.id %}">
+    {% csrf_token %}
+    {% for choice in poll.choice_set.all %}
+        <div class="form-check">
+            <input class="form-check-input" type="radio" name="choice" id="choice{{ forloop.counter }}" value="{{ choice.id }}">
+            <label class="form-check-label" for="choice{{ forloop.counter }}">
+                {{ choice.choice_text }}
+            </label>
+        </div>
+    {% endfor %}
+    <button type="submit" class="btn btn-primary mt-3">Vote</button>
+</form>
+
+<form method="post" action="{% url 'polls:clear_vote' poll.id %}">
+    {% csrf_token %}
+    <button type="submit" class="btn btn-secondary mt-3">Clear Vote</button>
+</form>
+
+{% if error_message %}
+    <p class="text-danger mt-2">{{ error_message }}</p>
+{% endif %}
+
+<h3 class="mt-4">Results:</h3>
+<ul class="list-group">
+    {% if total_votes > 0 %}
+        {% for choice in poll.choice_set.all %}
+            <li class="list-group-item">
+                {{ choice.choice_text }} -- {{ choice.votes }} vote{{ choice.votes|pluralize }}
+                <div class="progress mt-2">
+                    <div class="progress-bar" role="progressbar" style="width: {{ choice.votes|percentage:total_votes }}%;" aria-valuenow="{{ choice.votes|percentage:total_votes }}" aria-valuemin="0" aria-valuemax="100">{{ choice.votes|percentage:total_votes }}%</div>
+                </div>
+            </li>
+        {% endfor %}
+    {% else %}
+        <li class="list-group-item">No votes yet.</li>
+    
+    {% endif %}
+</ul>
+
+<!-- Charts Button and Display -->
+<button id="showCharts" class="btn btn-info mt-3">Show Charts</button>
+
+<div id="charts" style="display:none;">
+    <img src="{% url 'polls:age_chart' poll.id %}" alt="Age Distribution Chart" />
+
+    
+</div>
+
+<script>
+    document.getElementById("showCharts").onclick = function() {
+        document.getElementById("charts").style.display = "block";
+        this.style.display = "none";
+    };
+</script>
+
+{% endblock %}

@@ -1,0 +1,161 @@
+<!-- signup.html -->
+{% extends "base.html" %}
+
+{% block title %}Sign Up{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="row justify-content-center align-items-center vh-100">
+        <div class="col-md-6 col-lg-5">
+            <div class="card shadow p-4">
+                <h3 class="text-center mb-4">Sign Up</h3>
+                
+                {% if form.errors %}
+                    <div class="alert alert-danger">
+                        {{ form.errors }}
+                    </div>
+                {% endif %}
+                
+                <form method="post">
+                    {% csrf_token %}
+                    <div class="mb-3">
+                        <label for="id_username" class="form-label">Username</label>
+                        <input type="text" name="username" id="id_username" class="form-control" value="" autocomplete="off">
+                    </div>
+                    <div class="mb-3">
+                        <label for="id_email" class="form-label">Email</label>
+                        <input type="email" name="email" id="id_email" class="form-control" value="" autocomplete="off">
+                    </div>
+                    <div class="mb-3">
+                        <label for="id_password1" class="form-label">Password</label>
+                        <input type="password" name="password1" id="id_password1" class="form-control">
+                    </div>
+                    <div class="mb-3">
+                        <label for="id_password2" class="form-label">Confirm Password</label>
+                        <input type="password" name="password2" id="id_password2" class="form-control">
+                    </div>
+                    <!-- New Fields -->
+                    <!-- signup.html -->
+                    <div class="mb-3">
+                        <label for="id_day" class="form-label">Date of Birth</label>
+                        <div class="d-flex">
+                            <div class="me-2">
+                                <select name="day" id="id_day" class="form-control">
+                                    <option value="" disabled selected>Day</option>
+                                    {% for day in form.fields.day.choices %}
+                                        <option value="{{ day.0 }}">{{ day.1 }}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                            <div class="me-2">
+                                <select name="month" id="id_month" class="form-control">
+                                    <option value="" disabled selected>Month</option>
+                                    {% for month in form.fields.month.choices %}
+                                        <option value="{{ month.0 }}">{{ month.1 }}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                            <div>
+                                <select name="year" id="id_year" class="form-control">
+                                    <option value="" disabled selected>Year</option>
+                                    {% for year in form.fields.year.choices %}
+                                        <option value="{{ year.0 }}">{{ year.1 }}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="id_country" class="form-label">Country</label>
+                        <select name="country" id="id_country" class="form-control">
+                            <option value="Bangladesh" selected>Bangladesh</option>
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label for="id_district" class="form-label">District</label>
+                        <select name="district" id="id_district" class="form-control">
+                            <option value="" disabled selected>Select your district</option>
+                            <option value="Bagerhat">Bagerhat</option>
+                            <option value="Bandarban">Bandarban</option>
+                            <option value="Barguna">Barguna</option>
+                            <option value="Barisal">Barisal</option>
+                            <option value="Bhola">Bhola</option>
+                            <option value="Bogra">Bogra</option>
+                            <option value="Brahmanbaria">Brahmanbaria</option>
+                            <option value="Chandpur">Chandpur</option>
+                            <option value="Chittagong">Chittagong</option>
+                            <option value="Chuadanga">Chuadanga</option>
+                            <option value="Comilla">Comilla</option>
+                            <option value="Cox's Bazar">Cox's Bazar</option>
+                            <option value="Dhaka">Dhaka</option>
+                            <option value="Dinajpur">Dinajpur</option>
+                            <option value="Faridpur">Faridpur</option>
+                            <option value="Feni">Feni</option>
+                            <option value="Gaibandha">Gaibandha</option>
+                            <option value="Gazipur">Gazipur</option>
+                            <option value="Gopalganj">Gopalganj</option>
+                            <option value="Habiganj">Habiganj</option>
+                            <option value="Jamalpur">Jamalpur</option>
+                            <option value="Jessore">Jessore</option>
+                            <option value="Jhalokathi">Jhalokathi</option>
+                            <option value="Jhenaidah">Jhenaidah</option>
+                            <option value="Joypurhat">Joypurhat</option>
+                            <option value="Khagrachhari">Khagrachhari</option>
+                            <option value="Khulna">Khulna</option>
+                            <option value="Kishoreganj">Kishoreganj</option>
+                            <option value="Kurigram">Kurigram</option>
+                            <option value="Kushtia">Kushtia</option>
+                            <option value="Lakshmipur">Lakshmipur</option>
+                            <option value="Lalmonirhat">Lalmonirhat</option>
+                            <option value="Madaripur">Madaripur</option>
+                            <option value="Magura">Magura</option>
+                            <option value="Manikganj">Manikganj</option>
+                            <option value="Meherpur">Meherpur</option>
+                            <option value="Moulvibazar">Moulvibazar</option>
+                            <option value="Munshiganj">Munshiganj</option>
+                            <option value="Mymensingh">Mymensingh</option>
+                            <option value="Naogaon">Naogaon</option>
+                            <option value="Narail">Narail</option>
+                            <option value="Narayanganj">Narayanganj</option>
+                            <option value="Narsingdi">Narsingdi</option>
+                            <option value="Natore">Natore</option>
+                            <option value="Netrokona">Netrokona</option>
+                            <option value="Nilphamari">Nilphamari</option>
+                            <option value="Noakhali">Noakhali</option>
+                            <option value="Pabna">Pabna</option>
+                            <option value="Panchagarh">Panchagarh</option>
+                            <option value="Patuakhali">Patuakhali</option>
+                            <option value="Pirojpur">Pirojpur</option>
+                            <option value="Rajbari">Rajbari</option>
+                            <option value="Rajshahi">Rajshahi</option>
+                            <option value="Rangamati">Rangamati</option>
+                            <option value="Rangpur">Rangpur</option>
+                            <option value="Satkhira">Satkhira</option>
+                            <option value="Shariatpur">Shariatpur</option>
+                            <option value="Sherpur">Sherpur</option>
+                            <option value="Sirajganj">Sirajganj</option>
+                            <option value="Sunamganj">Sunamganj</option>
+                            <option value="Sylhet">Sylhet</option>
+                            <option value="Tangail">Tangail</option>
+                            <option value="Thakurgaon">Thakurgaon</option>
+                        </select>
+                    </div>
+                    <!--
+                    <div class="mb-3">
+                        <label for="id_phone_number" class="form-label">Phone Number</label>
+                        <input type="text" name="phone_number" id="id_phone_number" class="form-control" placeholder="Enter your phone number">
+                    </div>
+                    -->
+                    <button type="submit" class="btn btn-primary w-100">Sign up</button>
+                </form>
+                <hr>
+                <div class="text-center">
+                    <a href="{% url 'password_reset' %}">Forgot your password?</a>
+                    <p class="mt-3">Already have an account? <a href="{% url 'polls:login' %}">Log In</a></p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
